@@ -8,7 +8,7 @@ yum install mongodb-org -y &>>/tmp/roboshop.log
 
 echo -e "\e[31mUpdate listen address\e[0m"
 
-sed -e 's/127.0.0.1/0.0.0.0' /etc/mongo.conf
+sed -e -i 's/127.0.0.1/0.0.0.0' /etc/mongo.conf
 
 echo -e "\e[31m Enabling and restarting mongodb\e[0m"
 systemctl enable mongod &>>/tmp/roboshop.log
