@@ -10,6 +10,6 @@ echo -e "\e[31mUpdate listen address\e[0m"
 
 sed -e 's/127.0.0.1/0.0.0.0' /etc/mongo.conf
 
-echo -e "\e[31m Enabling and restarting nginx\e[0m"
+echo -e "\e[31m Enabling and restarting mongodb\e[0m"
 systemctl enable mongod &>>/tmp/roboshop.log
 systemctl restart mongod &>>/tmp/roboshop.log
