@@ -13,7 +13,9 @@ echo -e "\e[31mUnzip the file of frontend\e[0m"
 cd /usr/share/nginx/html
 unzip /tmp/frontend.zip &>>/tmp/roboshop.log
 
-# we need to configure config file
+
+echo -e "\e[31m configure config file\e[0m"
+cp roboshop.conf /etc/default.d/nginx/roboshop.conf
 
 echo -e "\e[31mEnabling and starting the nginx server\e[0m"
 systemctl enable nginx &>>/tmp/roboshop.log
