@@ -12,4 +12,4 @@ echo -e " ${color} Install MongoDb client  ${no_color}"
 yum install mongodb-org-shell -y &>>${file_path}
 
 echo -e " ${color}' Load schema ${no_color}"
-mongo --host mongodb-dev.devopspractice.store <$app_path/schema/${component}.js &>>${file_path}'
+mongo --host mongodb-dev.devopspractice.store <$app_path/schema/${component}.js &>>${file_path}
