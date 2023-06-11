@@ -23,7 +23,7 @@ go get &>>/tmp/roboshop.log
 go build &>>/tmp/roboshop.log
 
 echo -e "\e[31m copying dispatch.service \e[0m"
-cp /home/cemtos/Roboshop-shell/dispatch.service /etc/systemd/system/dispatch.service &>>/tmp/roboshop.log
+cp /home/centos/Roboshop-shell/dispatch.service /etc/systemd/system/dispatch.service &>>/tmp/roboshop.log
 
 echo -e "\e[31m  enable and start dispatch\e[0m"
 systemctl daemon-reload &>>/tmp/roboshop.log
