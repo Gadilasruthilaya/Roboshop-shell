@@ -36,4 +36,17 @@ nodejs(){
   systemctl daemon-reload  &>>${file_path}
   systemctl enable${component}&>>${file_path}
   systemctl start ${component} &>>${file_path}
+
+
+}
+
+mongo_schema_setup(){
+
+  echo -e "\e[31m copying MongoDB repo file\e[0m"
+  cp /home/centos/Roboshop-shell/mongodb.repo /etc/yum.repos.d/mongo.repo &>>/tmp/roboshop.log
+
+  echo -e "\e[31m Install MongoDb client \e[0m"
+  yum install mongodb-org-shell -y &>>/tmp/roboshop.log
+
+  echo -e "\e[31m Load schema\e[0m"
 }
