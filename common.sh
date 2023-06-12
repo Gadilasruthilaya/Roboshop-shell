@@ -69,6 +69,7 @@ maven(){
   mvn clean package &>>${file_path}
   mv target/${component}-1.0.jar ${component}.jar &>>${file_path}
 
+  app_presetup
   systemd_setup
 
   mysql_schema_setup
