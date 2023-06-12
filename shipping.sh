@@ -1,36 +1,39 @@
+component=component
 
-echo -e "\e[31m Install Maven \e[0m"
-yum install maven -y &>>/tmp/roboshop.log
 
-echo -e "\e[31m Add application user\e[0m"
-useradd roboshop &>>/tmp/roboshop.log
 
-echo -e "\e[31m create app directory\e[0m"
+echo -e "${color} Install Maven ${no_color}"
+yum install maven -y &>>${file_path}
+
+echo -e "${color} Add application user${no_color}"
+useradd roboshop &>>${file_path}
+
+echo -e "${color} create app directory${no_color}"
 rm -rf /app
-mkdir /app &>>/tmp/roboshop.log
+mkdir /app &>>${file_path}
 
-echo -e "\e[31m  Download application content\e[0m"
-curl -L -o /tmp/shipping.zip https://roboshop-artifacts.s3.amazonaws.com/shipping.zip &>>/tmp/roboshop.log
+echo -e "${color}  Download application content${no_color}"
+curl -L -o /tmp/component.zip https://roboshop-artifacts.s3.amazonaws.com/component.zip &>>${file_path}
 cd /app
 
-echo -e "\e[31m Extract application content \e[0m"
-unzip /tmp/shipping.zip &>>/tmp/roboshop.log
+echo -e "${color} Extract application content ${no_color}"
+unzip /tmp/component.zip &>>${file_path}
 
 
-echo -e "\e[31m Download maven depedencies\e[0m"
-mvn clean package &>>/tmp/roboshop.log
-mv target/shipping-1.0.jar shipping.jar &>>/tmp/roboshop.log
+echo -e "${color} Download maven depedencies${no_color}"
+mvn clean package &>>${file_path}
+mv target/component-1.0.jar component.jar &>>${file_path}
 
-echo -e "\e[31m copying shipping service\e[0m"
-cp /home/centos/Roboshop-shell/shipping.service /etc/systemd/system/shipping.service &>>/tmp/roboshop.log
+echo -e "${color} copying component service${no_color}"
+cp /home/centos/Roboshop-shell/component.service /etc/systemd/system/component.service &>>${file_path}
 
-echo -e "\e[31m Install my sql\e[0m"
-yum install mysql -y &>>/tmp/roboshop.log
+echo -e "${color} Install my sql${no_color}"
+yum install mysql -y &>>${file_path}
 
-echo -e "\e[31m load schema \e[0m"
-mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < /app/schema/shipping.sql &>>/tmp/roboshop.log
+echo -e "${color} load schema ${no_color}"
+mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < /app/schema/component.sql &>>${file_path}
 
-echo -e "\e[31m start shipping service\e[0m"
-systemctl daemon-reload &>>/tmp/roboshop.log
-systemctl enable shipping &>>/tmp/roboshop.log
-systemctl restart shipping &>>/tmp/roboshop.log
+echo -e "${color} start component service${no_color}"
+systemctl daemon-reload &>>${file_path}
+systemctl enable component &>>${file_path}
+systemctl restart component &>>${file_path}
