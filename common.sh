@@ -5,31 +5,36 @@ app_path="/app"
 
 
 app_presetup(){
-  echo -e " ${color} Add application user ${no_color}"
+    echo -e " ${color} Add application user ${no_color}"
     useradd roboshop &>>${file_path}
+    echo $?
 
     echo -e " ${color} Creat application directory ${no_color}"
     rm -rf $app_path &>>${file_path}
     mkdir $app_path
+    echo $?
 
     echo -e " ${color} Download application content  ${no_color}"
     curl -o /tmp/${component}.zip https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${file_path}
     cd $app_path
+    echo $?
 
     echo -e "${color}  Extract application Conetent ${no_color}"
     cd $app_path &>>${file_path}
     unzip /tmp/${component}.zip &>>${file_path}
-
+    echo $?
 }
 
 systemd_setup(){
    echo -e " ${color} setup Systemd service  ${no_color}"
     cp /home/centos/Roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>${file_path}
+    echo $?
 
     echo -e " ${color} start ${component}service ${no_color}"
     systemctl daemon-reload  &>>${file_path}
     systemctl enable${component}&>>${file_path}
     systemctl start ${component} &>>${file_path}
+    echo $?
 }
 
 nodejs(){
@@ -81,7 +86,7 @@ maven(){
       yum install mysql -y &>>${file_path}
 
       echo -e "${color} load schema ${no_color}"
-      mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < $app_path/schema/${component}.sql &>>${file_path}
+      mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < $app_pathcd /schema/${component}.sql &>>${file_path}
  }
 
  python(){
@@ -101,6 +106,7 @@ maven(){
  golang(){
  echo -e "${color}  Install golang ${no_color}"
  yum install golang -y &>>${file_path}
+ echo $?
 
  app_presetup
 
@@ -109,7 +115,7 @@ maven(){
  go mod init dispatch &>>${file_path}
  go get &>>/tmp/roboshop.log
  go build &>>/tmp/roboshop.log
-
+ echo $?
  systemd_setup
 
  }
