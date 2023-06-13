@@ -37,11 +37,11 @@ app_presetup(){
 
 systemd_setup(){
    echo -e " ${color} setup Systemd service  ${no_color}"
-    cp /home/centos/Roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>${file_path}
-    start_check $?
+   cp /home/centos/Roboshop-shell/${component}.service /etc/systemd/system/${component}.service &>>${file_path}
+   start_check $?
 
     echo -e " ${color} password  ${no_color}"
-   sed -i -e "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/$component.service &>>${file_path}
+    sed -i -e "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/$component.service &>>${file_path}
      start_check $?
 
     echo -e " ${color} start ${component}service ${no_color}"
