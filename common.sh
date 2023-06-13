@@ -92,12 +92,14 @@ maven(){
  python(){
  echo -e "${color} Install python ${no_color}"
  yum install python36 gcc python3-devel -y &>>${file_path}
+ echo $?
 
  app_presetup
 
  echo -e "${color} Install python dependencies ${no_color}"
  cd $app_path
  pip3.6 install -r requirements.txt &>>${file_path}
+ echo $?
 
  systemd_setup
 
@@ -106,7 +108,7 @@ maven(){
  golang(){
  echo -e "${color}  Install golang ${no_color}"
  yum install golang -y &>>${file_path}
- echo $?
+
 
  app_presetup
 
@@ -115,7 +117,7 @@ maven(){
  go mod init dispatch &>>${file_path}
  go get &>>/tmp/roboshop.log
  go build &>>/tmp/roboshop.log
- echo $?
+
  systemd_setup
 
  }
