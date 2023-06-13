@@ -92,15 +92,22 @@ maven(){
  python(){
  echo -e "${color} Install python ${no_color}"
  yum install python36 gcc python3-devel -y &>>${file_path}
- echo $?
+ if [ $? -eq 0 ]; then
+    echo success
+ else
+   echo failure
+ fi
 
  app_presetup
 
  echo -e "${color} Install python dependencies ${no_color}"
  cd $app_path
  pip3.6 install -r requirements.txt &>>${file_path}
- echo $?
-
+ if [ $? -eq 0 ]; then
+   echo success
+ else
+   echo failure
+ fi
  systemd_setup
 
  }
