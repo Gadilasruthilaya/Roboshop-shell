@@ -81,5 +81,35 @@ maven(){
       yum install mysql -y &>>${file_path}
 
       echo -e "${color} load schema ${no_color}"
-      mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < /app/schema/${component}.sql &>>${file_path}
+      mysql -h mysql-dev.devopspractice.store -uroot -pRoboShop@1 < $app_path/schema/${component}.sql &>>${file_path}
+ }
+
+ python(){
+ echo -e "${color} Install python ${no_color}"
+ yum install python36 gcc python3-devel -y &>>${file_path}
+
+ app_presetup
+
+ echo -e "${color} Install python dependencies ${no_color}"
+ cd $app_path
+ pip3.6 install -r requirements.txt &>>${file_path}
+
+ systemd_setup
+
+ }
+
+ golang(){
+ echo -e "${color}  Install golang ${no_color}"
+ yum install golang -y &>>${file_path}
+
+ app_presetup
+
+ echo -e "${color} download dependencies and build software ${no_color}"
+ cd $app_path
+ go mod init dispatch &>>${file_path}
+ go get &>>/tmp/roboshop.log
+ go build &>>/tmp/roboshop.log
+
+ systemd_setup
+
  }
