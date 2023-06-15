@@ -2,9 +2,9 @@ color="\e[31m"
 no_color="\e[0m"
 file_path="/tmp/roboshop.log"
 app_path="/app"
-user_id= $(id -u)
+user_id=$(id -u)
 
-if [ $user_id -eq 1 ]; then
+if [ $user_id -ne 0 ]; then
   echo script should run as root user
   exit 1
 
@@ -47,8 +47,9 @@ systemd_setup(){
    start_check $?
 
     echo -e " ${color} password  ${no_color}"
-    sed -i -e "s/roboshop_app_password/$roboshop_app_password/"  /etc/systemd/system/$component.service &>>${file_path}
+    sed -i -e "s/roboshop_app_password/$roboshop_app_password/" /etc/systemd/system/${component}.service &>>${file_path}
     echo $roboshop_app_password
+    echo ${component}.service
      start_check $?
 
     echo -e " ${color} start ${component}service ${no_color}"
