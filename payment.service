@@ -1,6 +1,5 @@
 [Unit]
 Description=Payment Service
-echo $roboshop_app_password
 
 [Service]
 User=root
